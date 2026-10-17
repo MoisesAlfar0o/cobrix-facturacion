@@ -401,6 +401,31 @@ select:focus-visible {
   overflow-x: auto;
 }
 
+.contracts-table table {
+  min-width: 470px;
+}
+
+.contracts-table th {
+  background: #f5f7fa;
+  font-size: 11px;
+  letter-spacing: .035em;
+  text-transform: none;
+}
+
+.contracts-table td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.contract-address,
+.contract-price {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

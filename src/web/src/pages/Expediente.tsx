@@ -24,6 +24,9 @@ export function ExpedientePage(): ReactNode {
   const abiertas = facturas.filter(f => f.estado === 'abierta')
   const deuda = abiertas.reduce((sum, f) => sum + f.saldo_cents, 0)
   const contratosIds = new Set(contratos.map(c => c.id))
+  const origen = cliente.origen.toLocaleLowerCase() === 'administrador de facturas'
+    ? 'Administrador de facturas'
+    : cliente.origen || '—'
 
   return (
     <>
@@ -49,7 +52,7 @@ export function ExpedientePage(): ReactNode {
               <dt>Documento</dt><dd className="mono">{documento(cliente)}</dd>
               <dt>Correo</dt><dd>{cliente.email || '—'}</dd>
               <dt>Teléfono</dt><dd>{cliente.telefono || '—'}</dd>
-              <dt>Origen</dt><dd>{cliente.origen || '—'}</dd>
+              <dt>Origen</dt><dd>{origen}</dd>
               <dt>Creado</dt><dd>{dateTime(cliente.created_at)}</dd>
             </dl>
           </CardBody>
@@ -59,20 +62,25 @@ export function ExpedientePage(): ReactNode {
           {contratos.length === 0
             ? <CardBody><p className="note">Sin contratos registrados.</p></CardBody>
             : (
-              <div className="table-wrap">
+              <div className="table-wrap contracts-table">
                 <table>
+                  <thead>
+                    <tr><th>Contrato</th><th>Estado</th><th>Plan</th><th>Sucursal</th></tr>
+                  </thead>
                   <tbody>
                     {contratos.map(c => (
                       <tr key={c.id}>
-                        <td className="mono">{c.id}</td>
                         <td>
-                          <Pill label={c.estado} tone={CONTRACT_STATUS_TONE[c.estado] ?? 'mute'} />
-                          <br /><span className="muted">{c.plan}</span><br />
-                          <small className="muted">{c.direccion || '—'}</small>
+                          <strong className="mono">{c.id}</strong>
+                          <small className="contract-address">{c.direccion || 'Dirección no disponible'}</small>
+                        </td>
+                        <td><Pill label={c.estado} tone={CONTRACT_STATUS_TONE[c.estado] ?? 'mute'} /></td>
+                        <td>
+                          <span>{c.plan || '—'}</span>
+                          <small className="contract-price">{c.moneda_sigla} · {usd(c.precio_cents)}/mes</small>
                         </td>
                         <td>
-                          <span className="mono">{c.sucursal || '—'}</span><br />
-                          <small className="muted">{c.moneda_sigla} · {usd(c.precio_cents)}/mes</small>
+                          <span className="mono">{c.sucursal || '—'}</span>
                         </td>
                       </tr>
                     ))}
