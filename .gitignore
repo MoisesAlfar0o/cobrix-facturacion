@@ -1,5 +1,6 @@
 node_modules
 src/web/dist/
+.env
 data/*.sqlite-wal
 data/*.sqlite-shm
 *.log
