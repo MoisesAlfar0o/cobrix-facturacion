@@ -1,0 +1,33 @@
+{
+	"name": "cobrix-prueba-facturacion",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Prueba técnica: integrar Cobrix con la API de un administrador de facturas.",
+	"type": "module",
+	"engines": {
+		"node": ">=24"
+	},
+	"scripts": {
+		"start": "node --disable-warning=ExperimentalWarning src/main.ts",
+		"start:billing-api": "node --disable-warning=ExperimentalWarning src/billing-api/start.ts",
+		"dev:web": "vite --config src/web/vite.config.ts",
+		"build:web": "vite build --config src/web/vite.config.ts",
+		"typecheck:web": "tsc --noEmit -p src/web/tsconfig.json",
+		"seed": "node --disable-warning=ExperimentalWarning src/billing-api/seed.ts",
+		"test": "node --disable-warning=ExperimentalWarning --test --test-concurrency=1 \"test/**/*.test.ts\"",
+		"typecheck": "tsc --noEmit"
+	},
+	"devDependencies": {
+		"@types/node": "^24.19.2",
+		"@types/react": "^19.3.0",
+		"@types/react-dom": "^19.3.0",
+		"@vitejs/plugin-react": "^6.1.2",
+		"typescript": "5.9.2",
+		"vite": "^8.3.4"
+	},
+	"dependencies": {
+		"react": "^19.3.1",
+		"react-dom": "^19.3.1",
+		"react-router-dom": "^7.18.4"
+	}
+}
