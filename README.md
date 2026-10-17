@@ -18,6 +18,14 @@ pnpm install
 pnpm run build:web
 ```
 
+Puedes crear tu archivo `.env` a partir de la plantilla para cambiar la fecha, los puertos o las rutas de las bases:
+
+```bash
+cp .env.example .env
+```
+
+El archivo `.env` es local y no se incluye en Git. Si no lo creas, el proyecto usa los valores predeterminados de `src/main.ts`. Las variables definidas en el entorno de la terminal tienen prioridad sobre las del archivo.
+
 Después, inicia el backend:
 
 ```bash

@@ -8,7 +8,7 @@
 		"node": ">=24"
 	},
 	"scripts": {
-		"start": "node --disable-warning=ExperimentalWarning src/main.ts",
+		"start": "node --env-file-if-exists=.env --disable-warning=ExperimentalWarning src/main.ts",
 		"start:billing-api": "node --disable-warning=ExperimentalWarning src/billing-api/start.ts",
 		"dev:web": "vite --config src/web/vite.config.ts",
 		"build:web": "vite build --config src/web/vite.config.ts",
